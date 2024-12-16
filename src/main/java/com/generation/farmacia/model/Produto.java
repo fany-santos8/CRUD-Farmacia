@@ -1,5 +1,7 @@
 package com.generation.farmacia.model;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -24,7 +27,8 @@ public class Produto {
 	private String nome;
 
 	@NotBlank(message = "O atributo preço é obrigatório!")
-	private double preco;
+	@Positive
+	private BigDecimal preco;
 
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
@@ -46,11 +50,11 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
