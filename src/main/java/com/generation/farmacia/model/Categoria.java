@@ -24,19 +24,16 @@ public class Categoria {
 	private Long id;
 
 	@NotBlank(message = "O atributo nome é obrigatório!")
-	@Size(min = 5, max = 50, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres!")
+	@Size(min = 5, max = 50, message = "O atributo texto deve conter no mínimo 5 e no máximo 50 caracteres!")
 	private String nome;
 
 	@NotBlank(message = "O atributo descrição é obrigatório!")
 	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres!")
 	private String descricao;
 
-	/*
-	 * @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade =
-	 * CascadeType.REMOVE)
-	 * 
-	 * @JsonIgnoreProperties("categoria") private List<Produto> produtos;
-	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("categoria")
+	private List<Produto> produtos;
 
 	public Long getId() {
 		return id;
@@ -62,9 +59,11 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-	/*
-	 * public List<Produto> getProdutos() { return produtos; }
-	 * 
-	 * public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
-	 */
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 }

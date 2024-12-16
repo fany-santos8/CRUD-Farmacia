@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categorias")
-@CrossOrigin(origins = "", allowedHeaders = "")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
 
 	@Autowired
@@ -42,9 +42,9 @@ public class CategoriaController {
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
-	@GetMapping("/categoria/{categoria}")
-	public ResponseEntity<List<Categoria>> getByCategoria(@PathVariable String categoria) {
-		return ResponseEntity.ok(repository.findAllByCategoriaContainingIgnoreCase(categoria));
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Categoria>> getByNome(@PathVariable String nome) {
+	    return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
 
 	@PostMapping
